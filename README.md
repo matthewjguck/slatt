@@ -5,7 +5,8 @@ Welcome to SLATT (Spotify Language Acquisition Translation Tool) - your ultimate
 SLATT connects directly to your Spotify account and translates the current song into your desired target language!
 
 # About
-Made using python and html
+Made using Python and HTML 
+
 SLATT utilizes Spotify's WebAPI, Genius' Lyricsgenius API, and LibreTranslate's API
 
 As someone with a rich musical background and as a student currently studying Spanish, I often find myself listening to songs in different languages. (Sometimes as a means to improve my aural skills, though often it's just for the pleasure of listening!) Reading song lyrics alongside their translation into my native language has been an effective method for bolstering my vocabulary in other languages. SLATT streamlines this process— gone are the days of manually searching for and translating song lyrics. SLATT connects directly to your Spotify account and translates the current song into your target language!
