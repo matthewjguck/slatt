@@ -1,5 +1,5 @@
-# SLATT
 ![SLATT](https://github.com/matthewjguck/slatt/assets/160309784/b7825637-ab0c-4454-b1cb-720e08e90c28)
+# SLATT
 Welcome to SLATT (Spotify Language Acquisition Translation Tool) - your ultimate companion for exploring music lyrics in multiple languages while enjoying your favorite tracks on Spotify.
 
 SLATT connects directly to your Spotify account and translates the current song into your desired target language!
