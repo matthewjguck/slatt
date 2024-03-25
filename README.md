@@ -3,7 +3,7 @@ Welcome to SLATT (Spotify Language Acquisition Translation Tool) - your ultimate
 
 SLATT connects directly to your Spotify account and translates the current song into your target language. 
 
-<img width="400" alt="Screenshot 2024-03-24 at 9 46 03 PM" src="https://github.com/matthewjguck/slatt/assets/160309784/0a0f41b2-0987-46f5-b5a6-8f20f173d263"> <img width="400" alt="Screenshot 2024-03-24 at 9 52 50 PM" src="https://github.com/matthewjguck/slatt/assets/160309784/dfbe271e-3290-48fe-aeec-117d97bff9ff">
+<img width="500" alt="Screenshot 2024-03-24 at 9 46 03 PM" src="https://github.com/matthewjguck/slatt/assets/160309784/0a0f41b2-0987-46f5-b5a6-8f20f173d263"> <img width="500" alt="Screenshot 2024-03-24 at 9 52 50 PM" src="https://github.com/matthewjguck/slatt/assets/160309784/dfbe271e-3290-48fe-aeec-117d97bff9ff">
 <img width="800" alt="Screenshot 2024-03-24 at 9 18 06 PM" src="https://github.com/matthewjguck/slatt/assets/160309784/fdc5dd5a-ec2c-4017-8e10-e849fba4f125">
 <img width="800" alt="Screenshot 2024-03-24 at 9 44 02 PM" src="https://github.com/matthewjguck/slatt/assets/160309784/179046ed-4480-455c-ae7f-e912621425cc">
 <img width="1470" alt="Screenshot 2024-03-24 at 10 27 42 PM" src="https://github.com/matthewjguck/slatt/assets/160309784/1621d8c8-446c-44ed-a0dd-400e88316538">
