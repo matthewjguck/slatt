@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slatt</title>
+<style>
+    body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: white;
+        margin: 0;
+        padding: 0;
+        background-color: #202020;
+    }
+    .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .heading {
+        text-align: center;
+        margin-bottom: 0px;
+        font-size: 50px;
+    }
+
+    .lyrics-container {
+        display: flex;
+        justify-content: space-between;
+    }
+    .lyrics-box {
+        flex: 1;
+        background-color: #df014b;
+        padding: 20px;
+        box-sizing: border-box;
+        border-radius: 15px; 
+        margin-right: 40px; 
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: bold;
+    }
+    .lyrics-box:last-child {
+        margin-right: 0; 
+    }
+
+    .playing {
+        margin: 20px; 
+    }
+
+    #track-name {
+        text-align: left;
+        font-size: 40px;
+        margin: 8px 0; 
+    }
+
+    #artist {
+        text-align: left;
+        font-size: 18px;
+        margin-top: 8px 0; 
+        margin-bottom: 10px 0;
+    }
+
+    #album-cover {
+        width: 300px; 
+        height: 300px; 
+        border-radius: 5%; 
+        margin-right: 10px;
+    }
+
+    .album-info {
+        display: flex;
+        align-items: center; 
+        margin-bottom: 20px; 
+    }
+
+    .album-cover-container {
+        margin-right: 20px; 
+    }
+
+    .track-info {
+        flex: 1; 
+    }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">S L A T T</h1>
+        <h4 style="text-align: center; font-weight: 500; margin: 0px; color: #d0d0d0;">Spotify Language Aquisition Translation Tool</h4>
+        <div class="playing">
+            <div class="album-info">
+                <div class="album-cover-container">
+                    <img id="album-cover" src="" alt="Album Cover">
+                </div>
+                <div class="track-info">
+                    <h2 id="track-name">{{ track_name }}</h2>
+                    <h3 id="artist">{{ artist }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="lyrics-container">
+            <div class="lyrics-box" id="left-lyrics-box">
+                <h2 style="margin: 4px;">Original</h2>
+                <!-- Lyrics for the left box -->
+                <div id="original-lyrics">Loading Lyrics...</div>
+            </div>
+            <div class="lyrics-box" id="right-lyrics-box" style="background-color: #00d26c;">
+                <h2 style="margin: 4px;">Translated</h2>
+                <!-- Lyrics for the right box -->
+                <div id="translated-lyrics">Loading Lyrics...</div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+        function fetchLyrics() {
+            fetch('/lyrics')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.lyrics) {
+                        // Replace newline characters with <br> tags
+                        const formattedLyrics = data.lyrics.replace(/\n/g, '<br>');
+                        // Use innerHTML to render the formatted lyrics with <br> tags
+                        document.getElementById('original-lyrics').innerHTML = formattedLyrics;
+                        document.getElementById('track-name').textContent = data.track_name;
+                        document.getElementById('artist').textContent = data.artist;
+                        document.getElementById('album-cover').src = data.album_cover_url;
+
+                        // Translate and display lyrics
+                        translateLyrics(data.lyrics);
+                    } else {
+                        document.getElementById('original-lyrics').textContent = 'Lyrics not found.';
+                    }
+                })
+                .catch(error => console.error('Error fetching lyrics:', error));
+        }
+
+
+        function translateLyrics(lyrics) {
+            // Split the lyrics into lines
+            const lines = lyrics.split('\n');
+            
+            // Fetch translation for each line
+            Promise.all(lines.map(async (line) => {
+                // Locally hosted libretranslate API server
+                const res = await fetch("http://127.0.0.1:5500/translate", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        q: line,
+                        source: "auto",
+                        target: "en",
+                        format: "text",
+                        api_key: ""
+                    }),
+                    headers: { "Content-Type": "application/json" }
+                });
+                
+                const translation = await res.json();
+                return translation.translatedText;
+            })).then((translatedLines) => {
+                // Join the translated lines with <br> tags
+                const translatedLyrics = translatedLines.join('<br>');
+
+                // Display translated lyrics in the right box
+                document.getElementById('translated-lyrics').innerHTML = translatedLyrics;
+            }).catch(error => console.error('Error translating lyrics:', error));
+        }
+
+        // Fetch lyrics when the page loads
+        fetchLyrics();
+    </script>
+</body>
+</html>
